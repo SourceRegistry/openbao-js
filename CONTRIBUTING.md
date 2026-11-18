@@ -4,7 +4,7 @@ Thanks for helping out! This guide covers local setup, how the code is organised
 
 - **Bugs:** open a [bug report](https://github.com/SourceRegistry/openbao-js/issues/new?template=bug_report.yml).
 - **Missing helper for an endpoint:** open a [typed helper request](https://github.com/SourceRegistry/openbao-js/issues/new?template=helper_request.yml). Until it lands, the endpoint works through `bao.request()`.
-- **Security issues:** report them [privately](https://github.com/SourceRegistry/openbao-js/security/advisories/new), never in a public issue.
+- **Security issues:** report them [privately](https://github.com/SourceRegistry/openbao-js/security/advisories/new), never in a public issue. See [SECURITY.md](SECURITY.md).
 
 ## Setup
 
