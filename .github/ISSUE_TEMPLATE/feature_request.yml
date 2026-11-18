@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest an improvement to the client itself (config, errors, retries, DX, docs, ...)
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: For a typed wrapper around a specific endpoint, use **Typed helper request** instead.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is hard or impossible today?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How you'd like it to work. Code sketches welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

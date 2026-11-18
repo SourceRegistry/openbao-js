@@ -1,0 +1,80 @@
+name: Bug report
+description: Something in openbao-js behaves incorrectly
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! **Never paste real tokens, unseal keys or secret values** — redact them.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: The smallest snippet that shows the problem.
+      render: ts
+      placeholder: |
+        import { OpenBao } from '@sourceregistry/openbao-js';
+
+        const bao = new OpenBao({ address: 'http://127.0.0.1:8200', token: 'root' });
+        await bao.kv2('secret').get('app/db');
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error output
+      description: Full error message and stack trace. `OpenBaoError` includes `status`, `errors` and the request path.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: openbao-js version
+      placeholder: '0.1.0'
+    validations:
+      required: true
+  - type: input
+    id: openbao-version
+    attributes:
+      label: OpenBao server version
+      description: From `bao version` or `await bao.sys.health()` → `version`.
+      placeholder: '2.7.2'
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options:
+        - Node.js
+        - Bun
+        - Deno
+        - Browser / edge runtime
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: runtime-version
+    attributes:
+      label: Runtime version
+      placeholder: 'Node.js 24.11.0'
+  - type: dropdown
+    id: module
+    attributes:
+      label: Module format
+      options:
+        - ESM (import)
+        - CommonJS (require)
+        - Bundled (Vite, webpack, esbuild, ...)
+  - type: checkboxes
+    id: raw-check
+    attributes:
+      label: Raw API check
+      options:
+        - label: The same request works with the `bao` CLI or `curl` (i.e. it's not a server-side permission or config issue)

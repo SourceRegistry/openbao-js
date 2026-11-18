@@ -220,6 +220,8 @@ await bao.auth.cert().login();
 
 ## Development
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide: project layout, adding a helper, commit conventions.
+
 ```sh
 npm ci
 npm run check            # typecheck + unit tests + build

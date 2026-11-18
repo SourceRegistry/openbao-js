@@ -1,0 +1,50 @@
+name: Typed helper request
+description: Ask for a typed helper for an OpenBao endpoint, engine or auth method that only works through the raw API today
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every endpoint already works through `bao.read()`, `bao.write()`, `bao.list()` or `bao.request()`.
+        This template is for adding a typed, ergonomic helper on top.
+  - type: input
+    id: endpoint
+    attributes:
+      label: Endpoint(s)
+      description: API path(s) and method(s).
+      placeholder: 'POST /sys/rekey/init, PUT /sys/rekey/update'
+    validations:
+      required: true
+  - type: input
+    id: docs
+    attributes:
+      label: OpenBao docs link
+      placeholder: https://openbao.org/docs/api/system/rekey/
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: What are you automating? This helps decide the shape of the helper.
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What you use today (optional)
+      description: Your current raw-API code, if any.
+      render: ts
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API (optional)
+      render: ts
+      placeholder: |
+        await bao.sys.rekey.init({ secret_shares: 5, secret_threshold: 3 });
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd like to open a PR for this (see CONTRIBUTING.md → "Adding a helper")
