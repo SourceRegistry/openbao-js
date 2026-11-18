@@ -1,0 +1,78 @@
+{
+  "name": "@sourceregistry/openbao-js",
+  "version": "0.0.0-semantically-released",
+  "description": "Typed, ergonomic, zero-dependency TypeScript client for the OpenBao HTTP API",
+  "keywords": [
+    "openbao",
+    "bao",
+    "vault",
+    "secrets",
+    "kv",
+    "transit",
+    "pki",
+    "approle",
+    "typescript"
+  ],
+  "homepage": "https://github.com/SourceRegistry/openbao-js#readme",
+  "bugs": {
+    "url": "https://github.com/SourceRegistry/openbao-js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SourceRegistry/openbao-js.git"
+  },
+  "license": "Apache-2.0",
+  "author": "SourceRegistry",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "prepare-alias": "node scripts/prepare-alias.mjs",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/github": "^12.0.11",
+    "@semantic-release/npm": "^13.2.0",
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@types/node": "^26.6.6",
+    "conventional-changelog-conventionalcommits": "^10.4.1",
+    "semantic-release": "^25.0.9",
+    "tsup": "^9.0.0",
+    "typescript": "^6.0.3",
+    "vitest": "^5.1.1"
+  }
+}
