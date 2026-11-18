@@ -1,0 +1,44 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "next",
+      "prerelease": true
+    },
+    {
+      "name": "beta",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          {
+            "breaking": true,
+            "release": "minor"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {}
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": ".release/openbao-js"
+      }
+    ],
+    "@semantic-release/github"
+  ]
+}

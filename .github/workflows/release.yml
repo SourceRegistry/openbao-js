@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    branches: [main, next, beta]
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    name: Release
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create tags and GitHub releases
+      issues: write # comment on released issues
+      pull-requests: write # comment on released pull requests
+      id-token: write # npm trusted publishing (OIDC) + provenance
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # NOTE: no `registry-url` here on purpose. setup-node would write an .npmrc
+      # with a NODE_AUTH_TOKEN placeholder, which shadows OIDC detection.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Ensure npm supports trusted publishing (>= 11.5.1)
+        run: npm install -g npm@^11.5.1 && npm --version
+
+      - run: npm ci
+      - run: npm run build
+      - name: Prepare unscoped alias package (openbao-js)
+        run: npm run prepare-alias
+
+      - name: Verify dependency signatures
+        run: npm audit signatures
+
+      # Authentication order (per package):
+      #   1. OIDC trusted publishing — used automatically once a trusted publisher
+      #      is configured on npmjs.com for that package.
+      #   2. NPM_TOKEN secret — needed only for the very first publish (the
+      #      packages must exist before a trusted publisher can be attached).
+      #      Remove the secret afterwards.
+      - name: Semantic release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
