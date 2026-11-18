@@ -4,6 +4,9 @@ Typed, ergonomic, **zero-dependency** TypeScript client for the [OpenBao](https:
 
 [![npm](https://img.shields.io/npm/v/@sourceregistry/openbao-js)](https://www.npmjs.com/package/@sourceregistry/openbao-js)
 [![CI](https://github.com/SourceRegistry/openbao-js/actions/workflows/release.yml/badge.svg)](https://github.com/SourceRegistry/openbao-js/actions/workflows/release.yml)
+[![Docs](https://img.shields.io/badge/docs-typedoc-blue)](https://sourceregistry.github.io/openbao-js/)
+
+📖 **API reference:** https://sourceregistry.github.io/openbao-js/
 
 - Built on the platform `fetch` — works in Node.js ≥ 20, Bun, Deno, and edge runtimes
 - ESM + CommonJS builds with full type declarations
@@ -220,6 +223,7 @@ await bao.auth.cert().login();
 ```sh
 npm ci
 npm run check            # typecheck + unit tests + build
+npm run docs             # API reference → ./docs (TypeDoc)
 
 # integration tests against a real dev server
 docker run --rm -p 8200:8200 openbao/openbao server -dev -dev-root-token-id=root -dev-listen-address=0.0.0.0:8200

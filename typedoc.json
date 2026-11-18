@@ -1,0 +1,21 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "tsconfig": "tsconfig.build.json",
+  "out": "docs",
+  "name": "openbao-js",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "sort": ["kind", "instance-first", "alphabetical-ignoring-documents"],
+  "navigationLinks": {
+    "GitHub": "https://github.com/SourceRegistry/openbao-js",
+    "npm": "https://www.npmjs.com/package/@sourceregistry/openbao-js",
+    "OpenBao API": "https://openbao.org/docs/api/"
+  },
+  "sourceLinkTemplate": "https://github.com/SourceRegistry/openbao-js/blob/{gitRevision}/{path}#L{line}",
+  "validation": { "notExported": true, "invalidLink": true, "notDocumented": false },
+  "treatWarningsAsErrors": true
+}

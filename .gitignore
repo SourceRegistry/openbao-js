@@ -167,3 +167,4 @@ vite.config.ts.timestamp-*
 
 # openbao-js
 .release/
+docs/
