@@ -1,0 +1,46 @@
+# Dependency updates. Commit prefixes are Conventional Commits types that do
+# NOT trigger a release (build/ci) — the library has no runtime dependencies,
+# so tooling bumps never need to ship a new version.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    # Let new releases age a few days before proposing them (supply-chain safety).
+    cooldown:
+      default-days: 5
+      semver-major-days: 14
+    commit-message:
+      prefix: build(deps)
+      prefix-development: build(deps-dev)
+    groups:
+      semantic-release:
+        patterns: ['semantic-release', '@semantic-release/*', 'conventional-changelog-*']
+      build-tooling:
+        patterns: ['typescript', 'tsup', 'typedoc', '@types/*']
+      test-tooling:
+        patterns: ['vitest', '@vitest/*']
+    ignore:
+      # TypeScript 7 ships no compiler API; tsup (dts) and TypeDoc need TS 6.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+      # conventionalcommits@10 needs conventional-changelog-writer@9, which the
+      # semantic-release plugins don't use yet (broke the first release).
+      - dependency-name: conventional-changelog-conventionalcommits
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 5
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        patterns: ['*']
