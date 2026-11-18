@@ -230,7 +230,7 @@ docker run --rm -p 8200:8200 openbao/openbao server -dev -dev-root-token-id=root
 BAO_ADDR=http://127.0.0.1:8200 BAO_TOKEN=root npm run test:integration
 ```
 
-Commits follow [Conventional Commits](https://www.conventionalcommits.org) — while on 0.x, `feat:` and breaking changes (`feat!:` / `BREAKING CHANGE:`) → minor, `fix:` → patch. Releases are fully automated by semantic-release on push to `main` (`next` / `beta` publish prereleases).
+Commits follow [Conventional Commits](https://www.conventionalcommits.org) — while on 0.x, `feat:` and breaking changes (`feat!:` / `BREAKING CHANGE:`) → minor, `fix:` → patch. Releases are fully automated by semantic-release on push to `main` (`next` / `beta` publish prereleases); each release updates [CHANGELOG.md](CHANGELOG.md) and the [GitHub releases](https://github.com/SourceRegistry/openbao-js/releases). Dependabot proposes weekly tooling updates as `build(deps)` / `ci` PRs, which don't trigger a release.
 
 ## Releasing / publishing
 
