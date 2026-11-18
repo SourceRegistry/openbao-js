@@ -1,10 +1,16 @@
 name: CI
 
+# Runs once per PR update. Release branches (main/next/beta) get the same
+# checks through release.yml, which calls this workflow before releasing.
 on:
   pull_request:
-  push:
-    branches-ignore: [main, next, beta] # release.yml runs the same checks on release branches
   workflow_call:
+  workflow_dispatch:
+
+# A new push to a PR cancels the now-outdated run; release runs are never cancelled.
+concurrency:
+  group: ci-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
