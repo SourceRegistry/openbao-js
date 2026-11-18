@@ -61,6 +61,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # Heals partial releases: publishes any package name still missing the
+      # latest tagged version (built from the tag's source). No-op normally.
+      - name: Ensure all package names are published
+        if: github.ref == 'refs/heads/main'
+        run: ./scripts/ensure-published.sh
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   docs:
     name: Deploy API docs
     needs: release
