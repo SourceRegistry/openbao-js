@@ -28,6 +28,9 @@ jobs:
         if: matrix.node == 24
       - run: npm test
       - run: npm run build
+      - name: Build API docs (fails on TypeDoc warnings)
+        if: matrix.node == 24
+        run: npm run docs
       - name: Smoke test ESM + CJS entry points
         run: |
           node -e "import('./dist/index.js').then(m => { if (typeof m.OpenBao !== 'function') process.exit(1) })"

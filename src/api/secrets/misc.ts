@@ -196,7 +196,7 @@ export interface GroupInput {
 }
 
 /** CRUD for entity-like identity objects that are addressable by `id/` and `name/`. */
-class IdentityCollection<T, Input extends object> {
+export class IdentityCollection<T, Input extends object> {
   /** Access by name (`identity/<kind>/name/:name`). */
   readonly byName: Resource<T, Input>;
   /** Access by id (`identity/<kind>/id/:id`). */
