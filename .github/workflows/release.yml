@@ -55,6 +55,11 @@ jobs:
       #   2. NPM_TOKEN secret — needed only for the very first publish (the
       #      packages must exist before a trusted publisher can be attached).
       #      Remove the secret afterwards.
+      #
+      # @semantic-release/git pushes a "chore(release): x.y.z" commit with
+      # CHANGELOG.md; its message carries GitHub's CI-skip marker so the push
+      # does not start this workflow again. Avoid writing that marker in other
+      # commit messages: GitHub skips CI for any head commit containing it.
       - name: Semantic release
         run: npx semantic-release
         env:
